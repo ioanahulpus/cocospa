@@ -42,14 +42,14 @@ import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import dws.uni.mannheim.semantic_complexity.Greeting;
+//import dws.uni.mannheim.semantic_complexity.Greeting;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 
 @SpringBootApplication
 @EnableSwagger2
-@ComponentScan(basePackageClasses = {
-    Greeting.class
-})
+//@ComponentScan(basePackageClasses = {
+//    Greeting.class
+//})
 public class Application {
    
     static GraphDatabaseService db;
