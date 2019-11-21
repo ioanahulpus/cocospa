@@ -25,5 +25,12 @@ public class KanopyDocumentJsonReader {
 		return doc;
 	}
 	
+	       public KanopyDocument readDocumentFromString(String docContent) {	                
+	                Gson gson = new GsonBuilder().create();
+	                KanopyDocument doc = gson.fromJson(docContent, KanopyDocument.class);
+	                
+	                return doc;
+	        }
+	
 	
 }

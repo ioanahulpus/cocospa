@@ -34,8 +34,8 @@ public class LinkedDocument implements Serializable{
 
    int complexityLevel;
    
-   public LinkedDocument(FeaturedDocument fdoc) {
-     this.text=fdoc.text;
+   public LinkedDocument(FeaturedDocument fdoc, String text) {
+     this.text = text;
      this.mentions = fdoc.mentions;
      this.paragraphs =  fdoc.paragraphs;
      this.sentences = fdoc.sentences;
@@ -155,6 +155,7 @@ public class LinkedDocument implements Serializable{
       List<Paragraph> l = new ArrayList<Paragraph>();
       int prevParEnd = 0;
       int nextParStartTokenIndex = 0;
+      text += "\n";
       while (text.indexOf("\n", prevParEnd)!=-1 ) {
          int breakpar = text.indexOf("\n", prevParEnd);
          Paragraph p = new Paragraph();
