@@ -44,4 +44,4 @@ for file in files_in_folder(dir_path):
     time.sleep(1)
 
 dataframe = pd.DataFrame(complexity).T
-dataframe.to_csv('results.csv')
+dataframe.to_csv('results.csv', sep = '\t')
