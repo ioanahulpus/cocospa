@@ -40,6 +40,7 @@ for file in files_in_folder(dir_path):
     js_response = json.loads(response.text)
     complexity_score = js_response['complexityScore']
     complexity[article_title][level] = complexity_score
+    print (basefile, '\t', complexity_score)
     time.sleep(1)
 
 dataframe = pd.DataFrame(complexity).T
