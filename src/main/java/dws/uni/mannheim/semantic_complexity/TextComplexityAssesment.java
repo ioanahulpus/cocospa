@@ -25,9 +25,9 @@ public class TextComplexityAssesment
             SAComplexityModes samodes = new SAComplexityModes(Application.db);
             MentionExtractor extr = new MentionExtractor(Application.db,
                     Application.dbpedia, kdoc);
-            System.out.println("removing outliers");
-            extr.removeLikelyWrongLinks();
-            System.out.println("removed");
+            //System.out.println("removing outliers");
+            //extr.removeLikelyWrongLinks();
+            //System.out.println("removed");
 
             FeaturedDocument fdoc = new FeaturedDocument(kdoc,
                     text, Application.nlpPipeline,
