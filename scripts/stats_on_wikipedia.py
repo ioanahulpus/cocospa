@@ -57,23 +57,15 @@ def get_complexity_from_api(text):
     complexity_score = js_response['complexityScore']
     return complexity_score
 
-def clean(text):
-    text = text.replace('-LRB-', '(')
-    text = text.replace('-RRB-', ')')
-    text = text.strip()
-    return text
+def make_dir(outp):
+    if not os.path.exists(outp):
+        os.makedirs(outp)
 
-with open('wikipedia_eval_clean.csv', 'w') as fout:
-    fout.write('\t'.join(['article', 'simple', 'complex', 'simple_size', 'complex_size']) + '\n')
+OUT_DIR = '/media/se/Data/document-aligned.v2/split'
+make_dir(OUT_DIR)
+
+with open('wikipedia_stats.csv', 'w') as fout:
+    fout.write('\t'.join(['article', 'simple', 'complex']) + '\n')
     for (article_name, simple_text), (_, complecs_text) in zip(articles_simple_wikipedia.items(), articles_complecs_wikipedia.items()):
-        simp_score = get_complexity_from_api(clean(simple_text))
-        comp_score = get_complexity_from_api(clean(complecs_text))
-        
-        simp_size = len(simple_text.split(' '))
-        comp_size = len(complecs_text.split(' '))
-
-        line = '\t'.join([article_name, str(simp_score), str(comp_score), str(simp_size), str(comp_size)])
-        print (line)
-        fout.write(line + '\n')
-
-
+        article_name = article_name.replace('\t', ' ')
+        fout.write('\t'.join([article_name, str(len(simple_text.split())), str(len(complecs_text.split()))]) + '\n')

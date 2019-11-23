@@ -57,23 +57,17 @@ def get_complexity_from_api(text):
     complexity_score = js_response['complexityScore']
     return complexity_score
 
-def clean(text):
-    text = text.replace('-LRB-', '(')
-    text = text.replace('-RRB-', ')')
-    text = text.strip()
-    return text
+def make_dir(outp):
+    if not os.path.exists(outp):
+        os.makedirs(outp)
 
-with open('wikipedia_eval_clean.csv', 'w') as fout:
-    fout.write('\t'.join(['article', 'simple', 'complex', 'simple_size', 'complex_size']) + '\n')
-    for (article_name, simple_text), (_, complecs_text) in zip(articles_simple_wikipedia.items(), articles_complecs_wikipedia.items()):
-        simp_score = get_complexity_from_api(clean(simple_text))
-        comp_score = get_complexity_from_api(clean(complecs_text))
-        
-        simp_size = len(simple_text.split(' '))
-        comp_size = len(complecs_text.split(' '))
+OUT_DIR = 'split'
+make_dir(OUT_DIR)
 
-        line = '\t'.join([article_name, str(simp_score), str(comp_score), str(simp_size), str(comp_size)])
-        print (line)
-        fout.write(line + '\n')
-
-
+for (article_name, simple_text), (_, complecs_text) in zip(articles_simple_wikipedia.items(), articles_complecs_wikipedia.items()):
+    article_name = article_name.replace('/', ' ')
+    article_name = article_name.replace('\\', ' ')
+    with open(os.path.join(OUT_DIR, article_name + '.sim'), 'w') as fout:
+        fout.write(simple_text.replace('-LRB-', '(').replace('-RRB-', ')'))
+    with open(os.path.join(OUT_DIR, article_name + '.com'), 'w') as fout:
+        fout.write(complecs_text.replace('-LRB-', '(').replace('-RRB-', ')'))
