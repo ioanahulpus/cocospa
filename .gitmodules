@@ -1,0 +1,3 @@
+[submodule "dbpedia-spotlight-model"]
+	path = dbpedia-spotlight-model
+	url = https://github.com/senisioi/dbpedia-spotlight-model.git
