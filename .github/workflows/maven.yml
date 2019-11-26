@@ -16,7 +16,8 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-  build-dbspotlight:
+  run-tests:
+
     runs-on: ubuntu-latest
 
     steps:
@@ -26,4 +27,4 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn -B package --file dbpedia-spotlight-model/pom.xml
+      run: mvn -B test --file pom.xml

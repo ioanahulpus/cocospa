@@ -2,7 +2,10 @@ import requests
 import json
 import sys
 
-URL = "http://localhost:8080/complexity"
+HOSTNAME = 'localhost'
+#HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
+
+URL = "http://" + HOSTNAME + ":8080/complexity"
 
 header = {"Content-Type": "application/json"}
 try:
