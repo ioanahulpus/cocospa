@@ -1,0 +1,24 @@
+FROM ubuntu:18.04
+
+MAINTAINER Sergiu Nisioi <sergiu.nisioi@fmi.unibuc.ro>
+
+USER root
+
+RUN apt-get update 
+RUN apt-get update && apt-get install -y build-essential git python3 python3-pip
+RUN apt-get update && apt-get install -y openjdk-8-jdk openjdk-8-jre maven
+
+
+RUN mkdir /home/cocospa
+
+RUN useradd -u 1000 -m cocospa
+RUN chown cocospa:cocospa /home/cocospa
+
+USER cocospa
+RUN mkdir /home/cocospa/.m2
+
+WORKDIR /home/cocospa/
+RUN git clone --recurse-submodules https://github.com/ioanahulpus/cocospa
+WORKDIR /home/cocospa/cocospa
+
+RUN mvn package
