@@ -58,7 +58,7 @@ public class Application {
     static StanfordCoreNLP nlpPipeline;
     static JedisPool jedisPool;
     static boolean allOnes;
-    
+    static String dbspotlightURL;
     
     public static void main(String[] args) throws IOException {
 
@@ -72,6 +72,8 @@ public class Application {
         String hdtWikipedia = args[arg_idx++];
         String redis = args[arg_idx++];
         int redis_port = Integer.valueOf(args[arg_idx++]);
+        String dbspotlightURL = args[arg_idx++];
+        
         
         db = new GraphDatabaseFactory().newEmbeddedDatabase(new File(neo));
 

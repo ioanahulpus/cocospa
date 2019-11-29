@@ -37,7 +37,7 @@ public class EntityLinker
     
     public static KanopyDocument Link(String text, String url, double threshold) throws ParseException, IOException{
 
-        HttpPost request = new HttpPost ("http://localhost:2222/rest/annotate");
+        HttpPost request = new HttpPost (url);
         JsonArray spans = new JsonArray();
         
         KanopyDocument d = new KanopyDocument();

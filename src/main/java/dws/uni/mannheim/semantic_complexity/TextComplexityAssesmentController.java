@@ -53,7 +53,8 @@ public class TextComplexityAssesmentController
         double complexityScore = TextComplexityAssesment.assess(modesIndex,
                 complexityRequestObject.getText(),
                 complexityRequestObject.getPhiTo1(),
-                complexityRequestObject.getLinkerThreshold());
+                complexityRequestObject.getLinkerThreshold(),
+                Application.dbspotlightURL);
         response.setComplexityScore(complexityScore);
         
         return response;
@@ -86,11 +87,13 @@ public class TextComplexityAssesmentController
         double complexityScoreT1 = TextComplexityAssesment.assess(modesIndex,
                 comparisonRequestObject.getText1(),
                 comparisonRequestObject.getPhiTo1(),
-                comparisonRequestObject.getLinkerThreshold());
+                comparisonRequestObject.getLinkerThreshold(),
+                Application.dbspotlightURL);
         double complexityScoreT2 = TextComplexityAssesment.assess(modesIndex,
                 comparisonRequestObject.getText2(),
                 comparisonRequestObject.getPhiTo1(),
-                comparisonRequestObject.getLinkerThreshold());
+                comparisonRequestObject.getLinkerThreshold(),
+                Application.dbspotlightURL);
         response.setText1ComplexityScore(complexityScoreT1);
         response.setText2ComplexityScore(complexityScoreT2);
         if (response.getText1ComplexityScore() == -1 && response.getText2ComplexityScore() == -1)

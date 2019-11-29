@@ -14,13 +14,13 @@ import dws.uni.mannheim.semantic_complexity.spreading_activation.SAComplexityMod
 public class TextComplexityAssesment
 {
     public static double assess(Map<String, Mode> modesIndex, String text,
-            boolean phiTo1, double linkerThreshold)
+            boolean phiTo1, double linkerThreshold, String dbspotlightUrl)
     {
         
         try (Transaction tx = Application.db.beginTx())
         {
 
-            KanopyDocument kdoc = EntityLinker.Link(text, "", linkerThreshold);
+            KanopyDocument kdoc = EntityLinker.Link(text, dbspotlightUrl, linkerThreshold);
 
             SAComplexityModes samodes = new SAComplexityModes(Application.db);
             MentionExtractor extr = new MentionExtractor(Application.db,

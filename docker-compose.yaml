@@ -17,7 +17,7 @@ services:
             context: docker
             dockerfile: Dockerfile-cocospa
         ports:
-          - "8080:8080"
+          - "8080:8081"
         volumes:
             - /media/data:/media/data
         tty: true
@@ -26,7 +26,7 @@ services:
               ipv4_address: 198.13.0.15
         depends_on:
             - "dbspotlight"
-        command: bash -c "mvn spring-boot:run -Dspring-boot.run.arguments=\"/media/data/dbpediaNeo4j/,/media/data/DBpedia2014Selected.hdt,198.13.0.1,6379\""
+        command: bash -c "mvn spring-boot:run -Dspring-boot.run.arguments=\"/media/data/dbpediaNeo4j/,/media/data/DBpedia2014Selected.hdt,198.13.0.16,6379,http://198.13.0.14:2222/rest/annotate\""
     redis:
         image: redis
         tty: true
