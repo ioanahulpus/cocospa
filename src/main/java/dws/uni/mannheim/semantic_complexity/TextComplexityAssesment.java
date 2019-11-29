@@ -62,7 +62,7 @@ public class TextComplexityAssesment
                     return -1;
                 else
                 {
-                    return 10 / simplicityValue;
+                    return 1 / simplicityValue;
                 }
             }
         }

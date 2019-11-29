@@ -115,7 +115,7 @@ public class Application {
         return new ApiInfoBuilder()
             .title("Spreading Activation Text Complexity Assesment API")
             .description("This API uses Spreading Activation and dbpedia linked entities to estimate the complexity of a given text.")
-            .contact(new Contact("Sergiu Nisioi", "http://nlp.unibuc.ro/people/snisioi.html", "sergiu.nisioi@gmail.com"))
+            .contact(new Contact("Sergiu Nisioi / Ioana Hulpus / Sanja Štajner", "https://github.com/ioanahulpus/cocospa", ""))
             //.contact(new Contact("Ioana Hulpus", "https://www.uni-mannheim.de/dws/people/researchers/postdoctoral-research-fellows/dr-ioana-hulpus/", ""))
             //.contact(new Contact("Sanja Štajner", "https://stajnersanja.wixsite.com/sanja", ""))
             .version("0.7")
