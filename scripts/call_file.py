@@ -1,9 +1,15 @@
+'''
+Script to call the API with default parameters 
+to get the complexity score for a text file.
+'''
+
+
 import requests
 import json
 import sys
 
-HOSTNAME = 'localhost'
-#HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
+#HOSTNAME = 'localhost'
+HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
 
 URL = "http://" + HOSTNAME + ":8080/complexity"
 

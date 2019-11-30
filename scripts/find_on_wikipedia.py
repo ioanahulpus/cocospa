@@ -1,4 +1,9 @@
 '''
+Script to dump the simplified and 
+standard text of an ARTICLE
+from the wikipedia corpus.
+Solely for testing purposes.
+
     Download wikipedia from here: https://cs.pomona.edu/~dkauchak/simplification/data.v2/document-aligned.v2.tar.gz
     https://cs.pomona.edu/~dkauchak/simplification/
 
@@ -15,6 +20,9 @@ import pandas as pd
 
 HOSTNAME = 'localhost'
 #HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
+
+# example bad simplification article 
+ARTICLE = 'Wikipedia:Block log'
 
 URL = "http://" + HOSTNAME + ":8080/complexity"
 
@@ -51,18 +59,6 @@ with open(complecs_wiki, 'r', encoding='utf-8') as fin:
 
 articles_simple_wikipedia = split_into_articles(simple)
 articles_complecs_wikipedia = split_into_articles(complecs)
-
-def get_complexity_from_api(text):
-    data = {"text": text}
-    json_data = json.dumps(data)
-    time.sleep(1)
-    response = requests.post(URL, headers = header, data = json_data)
-    js_response = json.loads(response.text)
-    complexity_score = js_response['complexityScore']
-    return complexity_score
-
-# example bad simplification article 
-ARTICLE = 'Wikipedia:Block log'
 
 for (article_name, simple_text), (_, complecs_text) in zip(articles_simple_wikipedia.items(), articles_complecs_wikipedia.items()):
     if (article_name == ARTICLE):

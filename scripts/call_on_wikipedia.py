@@ -1,4 +1,8 @@
 '''
+Script to call the API with default parameters 
+to get the complexity score for every text file in
+the standard and simplified wikipedia corpus.
+
     Download wikipedia from here: https://cs.pomona.edu/~dkauchak/simplification/data.v2/document-aligned.v2.tar.gz
     https://cs.pomona.edu/~dkauchak/simplification/
 

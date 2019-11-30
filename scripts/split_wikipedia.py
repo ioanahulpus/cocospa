@@ -1,4 +1,7 @@
 '''
+Script to split the wikipedia corpus into separate
+text files.
+
     Download wikipedia from here: https://cs.pomona.edu/~dkauchak/simplification/data.v2/document-aligned.v2.tar.gz
     https://cs.pomona.edu/~dkauchak/simplification/
 
@@ -51,15 +54,6 @@ with open(complecs_wiki, 'r', encoding='utf-8') as fin:
 
 articles_simple_wikipedia = split_into_articles(simple)
 articles_complecs_wikipedia = split_into_articles(complecs)
-
-def get_complexity_from_api(text):
-    data = {"text": text}
-    json_data = json.dumps(data)
-    time.sleep(1)
-    response = requests.post(URL, headers = header, data = json_data)
-    js_response = json.loads(response.text)
-    complexity_score = js_response['complexityScore']
-    return complexity_score
 
 def make_dir(outp):
     if not os.path.exists(outp):

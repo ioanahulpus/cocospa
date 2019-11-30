@@ -1,3 +1,10 @@
+'''
+Script to call the API with default parameters 
+to get the complexity score for every text file in
+a directory.
+'''
+
+
 import requests
 import json
 import sys
@@ -24,8 +31,6 @@ def files_in_folder(mypath):
     return sorted(fisiere)
 
 for file in files_in_folder(dir_path):
-    if '-spanish' in os.path.basename(file):
-        continue
     with open(file, 'r', encoding='utf-8') as fin:
         text = fin.read()
 

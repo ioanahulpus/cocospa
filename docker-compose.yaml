@@ -7,7 +7,7 @@ services:
             dockerfile: Dockerfile-dbspotlight
         #user: $UID:$GID
         volumes:
-            - data:/media/data
+            - $DATA:/media/data
         tty: true
         networks:
             net:
@@ -21,7 +21,7 @@ services:
         ports:
           - "8081:8080"
         volumes:
-            - data:/media/data
+            - $DATA:/media/data
         tty: true
         networks:
             net:

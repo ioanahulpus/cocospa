@@ -1,3 +1,9 @@
+'''
+Script to call the API with default parameters 
+to get the complexity score for every text file in
+the newsela corpus.
+'''
+
 import requests
 import json
 import sys
