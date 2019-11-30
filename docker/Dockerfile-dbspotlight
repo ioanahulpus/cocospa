@@ -12,7 +12,7 @@ RUN java -version
 
 RUN mkdir /home/cocospa
 
-RUN useradd -u 1000 -m cocospa
+RUN useradd -u 1001 -m cocospa
 RUN chown cocospa:cocospa /home/cocospa
 
 USER cocospa
