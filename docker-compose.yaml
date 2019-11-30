@@ -12,7 +12,7 @@ services:
         networks:
             net:
               ipv4_address: 198.13.0.14
-        command: bash -c "java -Xmx300g -jar rest/target/rest-1.0-jar-with-dependencies.jar /media/data/en http://0.0.0.0:2222/rest"
+        command: bash -c "/usr/lib/jvm/java-8-openjdk-amd64/bin/java -Xmx300g -jar rest/target/rest-1.0-jar-with-dependencies.jar /media/data/en http://0.0.0.0:2222/rest"
     cocospa:
         build:
             context: docker
