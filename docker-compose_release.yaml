@@ -1,0 +1,40 @@
+version: '2.1'
+
+services:
+    dbspotlight:
+        image: snisioi/dbspotlight:latest
+        #user: $UID:$GID
+        volumes:
+            - $DATA:/media/data
+        tty: true
+        networks:
+            net:
+              ipv4_address: 198.13.0.14
+        command: bash -c "/usr/lib/jvm/java-8-openjdk-amd64/bin/java -Xmx300g -jar rest/target/rest-1.0-jar-with-dependencies.jar /media/data/en http://0.0.0.0:2222/rest"
+    cocospa:
+        image: snisioi/cocospa:latest
+        #user: $UID:$GID
+        ports:
+          - "8081:8080"
+        volumes:
+            - $DATA:/media/data
+        tty: true
+        networks:
+            net:
+              ipv4_address: 198.13.0.15
+        depends_on:
+            - "dbspotlight"
+        command: bash -c "mvn spring-boot:run -Dspring-boot.run.arguments=\"/media/data/dbpediaNeo4j/,/media/data/DBpedia2014Selected.hdt,198.13.0.16,6379,http://198.13.0.14:2222/rest/annotate\""
+    redis:
+        image: redis
+        tty: true
+        networks:
+            net:
+              ipv4_address: 198.13.0.16
+networks:
+    net:
+        ipam:
+            driver: default
+            config:
+                - subnet: 198.13.13.0/16
+                  gateway: 198.13.13.1
