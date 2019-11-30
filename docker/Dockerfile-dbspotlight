@@ -21,4 +21,5 @@ WORKDIR /home/cocospa/
 RUN git clone --recurse-submodules https://github.com/ioanahulpus/cocospa
 WORKDIR /home/cocospa/cocospa/dbpedia-spotlight-model
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+ENV JRE_HOME /usr/lib/jvm/java-8-openjdk-amd64/jre
 RUN mvn --version && mvn package
