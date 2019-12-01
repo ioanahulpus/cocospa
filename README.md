@@ -19,7 +19,7 @@ Clone the repo using:
 
 <a name="api"></a> 
 ## Calling the API
-The HTTP API runs on port 8080 and the swagger documentation of the endpoints together with the corresponding input types is available on the same port [http://$HOST:8080/swagger-ui.html].
+The HTTP API runs on port 8080 and the swagger documentation of the endpoints together with the corresponding input types is available on the same port [http://$HOST:8080/swagger-ui.html]().
 We currently support two endpoints: *compare* and *complexity*. The later expects a payload of the following form:
 ```json
 {
@@ -44,7 +44,7 @@ The only required parameter is the **text**, all the other values default to the
 - tokenDecay, sentenceDecay and paragraphDecay - *gamma*, γ_w, γ_s, γ_p defined in Section 3.2 in the [ACL paper](https://www.aclweb.org/anthology/P19-1377.pdf), decay values that take into consideration the distance between concepts within a sentence, between sentences and between paragraphs
 - phiTo1 - If true, the phi function is sensitive only to changes in the set of activated concepts. If false, the phi function is sensitive to the actual spreading activation scores, and to the popularity of mentioned concepts
 - useExclusivity and usePopularity - boolean values that make use or not of the strenght of semantic relations between concepts as defined in [this paper](https://link.springer.com/chapter/10.1007%2F978-3-319-25007-6_26), see Section 3.1 for more details
-- linkerThreshold - is a parameter that sets the confidence therhsold for the entity linker. One may use the current [dbpedia-spotlight demo](https://www.dbpedia-spotlight.org/demo/) to test different thesholds on the input texts. 
+- linkerThreshold - is a parameter that sets the confidence threshold for the entity linker. One may use the current [dbpedia-spotlight demo](https://www.dbpedia-spotlight.org/demo/) to test different thesholds on the input texts. 
 
 <a name="curl"></a> 
 ### cURL Example
@@ -112,7 +112,7 @@ which prints the table separated values:
 ```bash
 python3 scripts/call_on_newsela.py $LOCATION_OF_NEWSELA $API_ENDPOINT
 ```
-First one needs to obtain access the [Newsela Data](https://newsela.com/data/). The result of the script is available in **results/newsela.csv**. The script by default calls an API running on natively.
+First one needs to obtain access the [Newsela Data](https://newsela.com/data/). The result of the script is available in **results/newsela.csv**. The script by default calls an API running on localhost.
 The resuls is a .csv file that shows the scores for different newsela levels:
 
 | Document            |   0    |   1    |   2    |   3    |   4    |
@@ -132,7 +132,7 @@ cd ..
 # run the python script
 python3 scripts/call_on_wikipedia.py data/document-aligned.v2/simple.txt data/document-aligned.v2/normal.txt $API_ENDPOINT
 ```
-The result of the script is available in **results/wikipedia.csv**. The script by default calls an API running on natively. The resuls is a .csv file that shows the scores for different wikipedia documents:
+The result of the script is available in **results/wikipedia.csv**. The script by default calls an API running on natively. The result is a .csv file that shows the scores for different wikipedia documents:
 
 | article | simple | complex | simple_size | complex_size |
 | -------: | :----: | :----: | :----: | :----: |
@@ -165,9 +165,11 @@ You can run the api if you have *docker* and *docker-compose* installed.
 ```
 If you wish to build the images of the containers from scracth, use `docker-compose -f docker-compose_build.yaml up -d`.
 
-Check that the containers have started successfully (`docker-compose ps`) and that dbspotlight finished loading the data with:
+Check that the containers have started successfully (`docker-compose ps`) and that cocospa finished the initialization and that dbspotlight and redis finished loading the data:
 ```bash
 	docker-compose logs dbspotlight
+	docker-compose logs redis
+	docker-compose logs cocospa
 ```
 
 <a name="natively"></a>
@@ -190,8 +192,9 @@ Our code is compatible with newer java version and it can be compiled using mave
 A redis instance must run on localhost first. Follow the steps in this [tutorial to install Redis](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04).
 
 
-To have the api running faster, we provide a dump of a database in which the activations have been computed for a large number of entities. The dump has been saved with redis version 5.0.6. **If you are running a newer version (e.g., 6.0.1), the dump might not be compatible**. This will not be a problem if you run using docker.
+To have the api running faster, we provide a dump of a database in which the activations have been computed for a large number of entities. The dump has been saved with redis version 5.0.6. **If you are running a newer version (e.g., 6.0.1), the dump might not be compatible**. **This is okay**, you can still use the code, but the API might be a little slower. This will not be a problem if you run using docker.
 
+###### (Optional) Load the redis dump 
 To load the dump that we provide in your redis instance, follow the steps provided here:
 
 ```bash
