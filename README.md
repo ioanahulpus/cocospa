@@ -82,10 +82,11 @@ which returns:
 python3 scripts/call_on_dir.py data/examples/
 ```
 which prints the table separated values:
-
-Contact network.com | 0.9221964367423306
-Contact network.sim | 0.49564969874355497
-Gambling.com | 1.6215938510362011
-Gambling.sim | 0.5680619862642763
-Immunology.com | 0.611732686310203
-Immunology.sim | 1.7271475433638426
+|Document            | Score              |
+|--------------------|-------------------:|
+|Contact network.com | 0.9221964367423306 |
+|Contact network.sim | 0.49564969874355497|
+|Gambling.com        | 1.6215938510362011 |
+|Gambling.sim        | 0.5680619862642763 |
+|Immunology.com      | 0.611732686310203  |
+|Immunology.sim      | 1.7271475433638426 |
