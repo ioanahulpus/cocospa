@@ -77,10 +77,10 @@ Using curl from the command line might not be optimal in case we want to automat
 #### 2. Run complexity assesment on a file
 Calling the API on a single file, simplified (\*.sim) and complex wikipedia (\*.com) can be done by providing the file path to *call_file.py* script.
 ```bash
-python3 scripts/call_file.py data/examples/Gambling.sim http://demaq3.informatik.uni-mannheim.de:8080/complexity
+	python3 scripts/call_file.py data/examples/Gambling.sim http://demaq3.informatik.uni-mannheim.de:8080/complexity
 
-# if no URL is provided, it defaults to the server from Mannheim
-python3 scripts/call_file.py data/examples/Gambling.com 
+	# if no URL is provided, it defaults to the server from Mannheim
+	python3 scripts/call_file.py data/examples/Gambling.com 
 ```
 which returns:
 ```json
@@ -94,8 +94,8 @@ which returns:
 
 #### 3. Run complexity assesment on a directory
 ```bash
-# first parameter is the directory, second parametere (optional) is the API endpoint
-python3 scripts/call_on_dir.py data/examples/
+	# first parameter is the directory, second parametere (optional) is the API endpoint
+	python3 scripts/call_on_dir.py data/examples/
 ```
 which prints the table separated values:
 
@@ -110,7 +110,7 @@ which prints the table separated values:
 
 #### 4. Run complexity assesment on Newsela
 ```bash
-python3 scripts/call_on_newsela.py $LOCATION_OF_NEWSELA $API_ENDPOINT
+	python3 scripts/call_on_newsela.py $LOCATION_OF_NEWSELA 
 ```
 First one needs to obtain access the [Newsela Data](https://newsela.com/data/). The result of the script is available in **results/newsela.csv**. The script by default calls an API running on localhost.
 The resuls is a .csv file that shows the scores for different newsela levels:
@@ -130,7 +130,7 @@ tar -xvf document-aligned.v2.tar.gz && \
 cd ..
 
 # run the python script
-python3 scripts/call_on_wikipedia.py data/document-aligned.v2/simple.txt data/document-aligned.v2/normal.txt $API_ENDPOINT
+	python3 scripts/call_on_wikipedia.py data/document-aligned.v2/simple.txt data/document-aligned.v2/normal.txt
 ```
 The result of the script is available in **results/wikipedia.csv**. The script by default calls an API running on natively. The result is a .csv file that shows the scores for different wikipedia documents:
 
