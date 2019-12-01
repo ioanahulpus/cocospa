@@ -1,6 +1,6 @@
-# Conceptual Complexity using Spreading Activation ![](https://github.com/ioanahulpus/cocospa/workflows/Java%20CI/badge.svg)
+# CoCo: A Tool for Automatically Assessing Conceptual Complexity of Texts ![](https://github.com/ioanahulpus/cocospa/workflows/Java%20CI/badge.svg)
 
-This is the code to run and call an HTTP endpoint that returns a score of conceptual complexity for a text. We are currently running a Swagger API component onto a server at the [University of Mannheim](http://demaq3.informatik.uni-mannheim.de:8080/swagger-ui.html).
+This is the code to run and call an HTTP endpoint that computes the conceptual complexity using spreading activation for a text. We are currently running a Swagger API component onto a server at the [University of Mannheim](http://demaq3.informatik.uni-mannheim.de:8080/swagger-ui.html).
 
 Clone the repo using:
 ```bash
