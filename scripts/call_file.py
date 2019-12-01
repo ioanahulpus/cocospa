@@ -11,13 +11,19 @@ import sys
 #HOSTNAME = 'localhost'
 HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
 
-URL = "http://" + HOSTNAME + ":8080/complexity"
+defaultURL = "http://" + HOSTNAME + ":8080/complexity"
 
 header = {"Content-Type": "application/json"}
 try:
     file_path = sys.argv[1]
 except:
     print ("Please provide a file as a first arg")
+
+try:
+    URL = sys.argv[2]
+except:
+    URL = defaultURL
+    print ("No URL provided as arg2, using:", URL)
 
 
 with open(file_path, 'r', encoding='utf-8') as fin:

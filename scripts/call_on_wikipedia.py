@@ -19,8 +19,7 @@ import pandas as pd
 
 HOSTNAME = 'localhost'
 #HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
-
-URL = "http://" + HOSTNAME + ":8080/complexity"
+defaultURL = "http://" + HOSTNAME + ":8080/complexity"
 
 
 header = {"Content-Type": "application/json"}
@@ -32,7 +31,14 @@ except:
 try:
     complecs_wiki = sys.argv[2]
 except:
-    print ("Please provide simple wikipedia as a second arg")
+    print ("Please provide complex wikipedia as a second arg")
+
+try:
+    URL = sys.argv[3]
+except:
+    URL = defaultURL
+    print ("No URL provided as arg3, using:", URL)
+
 
 def split_into_articles(wiki_text):
     articles = defaultdict(str)

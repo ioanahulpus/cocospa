@@ -8,26 +8,12 @@ Solely for testing purposes.
     https://cs.pomona.edu/~dkauchak/simplification/
 
 '''
-
-
-import requests
-import json
 import sys
-import os
-import time
 from collections import defaultdict
-import pandas as pd
-
-HOSTNAME = 'localhost'
-#HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
 
 # example bad simplification article 
-ARTICLE = 'Wikipedia:Block log'
+defaultARTICLE = 'Wikipedia:Block log'
 
-URL = "http://" + HOSTNAME + ":8080/complexity"
-
-
-header = {"Content-Type": "application/json"}
 try:
     simple_wiki = sys.argv[1]
 except:
@@ -37,6 +23,13 @@ try:
     complecs_wiki = sys.argv[2]
 except:
     print ("Please provide simple wikipedia as a second arg")
+
+try:
+    ARTICLE = sys.argv[3]
+except:
+    ARTICLE = defaultARTICLE
+    print ("No article provided as arg3, using default:", defaultARTICLE)
+
 
 def split_into_articles(wiki_text):
     articles = defaultdict(str)

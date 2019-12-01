@@ -15,7 +15,7 @@ services:
         image: snisioi/cocospa:latest
         #user: $UID:$GID
         ports:
-          - "8081:8080"
+          - "8080:8080"
         volumes:
             - $DATA:/media/data
         tty: true

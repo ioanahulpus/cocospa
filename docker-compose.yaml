@@ -19,7 +19,7 @@ services:
             dockerfile: Dockerfile-cocospa
         #user: $UID:$GID
         ports:
-          - "8081:8080"
+          - "8080:8080"
         volumes:
             - $DATA:/media/data
         tty: true

@@ -42,7 +42,7 @@ public class TextComplexityAssesmentController
                                new DecaySetting(complexityRequestObject.getTokenDecay(),
                                                 complexityRequestObject.getSentenceDecay(),
                                                 complexityRequestObject.getParagraphDecay()),
-                           complexityRequestObject.getUseImportance(),
+                           complexityRequestObject.getUsePopularity(),
                            complexityRequestObject.getUseExclusivity()));
         Map<String, Mode> modesIndex = new HashMap<>();
         for (Mode m : modes)
@@ -76,7 +76,7 @@ public class TextComplexityAssesmentController
                                new DecaySetting(comparisonRequestObject.getTokenDecay(),
                                                 comparisonRequestObject.getSentenceDecay(),
                                                 comparisonRequestObject.getParagraphDecay()),
-                           comparisonRequestObject.getUseImportance(),
+                           comparisonRequestObject.getUsePopularity(),
                            comparisonRequestObject.getUseExclusivity()));
         Map<String, Mode> modesIndex = new HashMap<>();
         for (Mode m : modes)

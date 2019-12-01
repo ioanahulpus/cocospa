@@ -11,17 +11,22 @@ import sys
 import os
 import time
 
-HOSTNAME = 'localhost'
-#HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
-
-URL = "http://" + HOSTNAME + ":8080/complexity"
-
+#HOSTNAME = 'localhost'
+HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
+defaultURL = "http://" + HOSTNAME + ":8080/complexity"
 
 header = {"Content-Type": "application/json"}
 try:
     dir_path = sys.argv[1]
 except:
     print ("Please provide a directory of files as a first arg")
+
+try:
+    URL = sys.argv[2]
+except:
+    URL = defaultURL
+    print ("No URL provided as arg2, using:", URL)
+
 
 def files_in_folder(mypath):
     fisiere = []

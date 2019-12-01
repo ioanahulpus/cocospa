@@ -1,0 +1,2 @@
+
+2009 ( MMIX ) was a common year starting on Thursday ( dominical letter D ) in the Gregorian calendar . It was the 2009th year of the Common Era or the Anno Domini designation , the 9th year of the 3rd millennium and the 21st century , and the 10th and last of the 2000s decade .

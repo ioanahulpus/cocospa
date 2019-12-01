@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder(
 { "linkerThreshold", "graphDecay", "firingThreshold", "tokenDecay",
-        "sentenceDecay", "paragraphDecay", "useImportance", "useExclusivity",
+        "sentenceDecay", "paragraphDecay", "usePopularity", "useExclusivity",
         "phiTo1", "text1", "text2" })
 public class TextComplexityComparisonRequestObject
 {
@@ -44,9 +44,9 @@ public class TextComplexityComparisonRequestObject
     @ApiModelProperty(example = "0.5")
     private Double paragraphDecay = 0.5;
 
-    @JsonProperty("useImportance")
+    @JsonProperty("usePopularity")
     @ApiModelProperty(example = "true")
-    private Boolean useImportance = true;
+    private Boolean usePopularity = true;
 
     @JsonProperty("useExclusivity")
     @ApiModelProperty(example = "true")
@@ -139,16 +139,16 @@ public class TextComplexityComparisonRequestObject
         this.paragraphDecay = paragraphDecay;
     }
 
-    @JsonProperty("useImportance")
-    public Boolean getUseImportance()
+    @JsonProperty("usePopularity")
+    public Boolean getUsePopularity()
     {
-        return useImportance;
+        return usePopularity;
     }
 
-    @JsonProperty("useImportance")
-    public void setUseImportance(Boolean useImportance)
+    @JsonProperty("usePopularity")
+    public void setUsePopularity(Boolean usePopularity)
     {
-        this.useImportance = useImportance;
+        this.usePopularity = usePopularity;
     }
 
     @JsonProperty("useExclusivity")

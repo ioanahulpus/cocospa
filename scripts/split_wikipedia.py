@@ -6,23 +6,10 @@ text files.
     https://cs.pomona.edu/~dkauchak/simplification/
 
 '''
-
-
-import requests
-import json
 import sys
 import os
-import time
 from collections import defaultdict
-import pandas as pd
 
-HOSTNAME = 'localhost'
-#HOSTNAME = 'demaq3.informatik.uni-mannheim.de'
-
-URL = "http://" + HOSTNAME + ":8080/complexity"
-
-
-header = {"Content-Type": "application/json"}
 try:
     simple_wiki = sys.argv[1]
 except:
