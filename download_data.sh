@@ -31,6 +31,8 @@ wget "https://github.com/ioanahulpus/cocospa/releases/download/Data/dbpediaNeo4J
 cat dbpediaNeo4J.tar.gz.* | tar xzvf - && \
 \rm dbpediaNeo4J.tar.gz.* && \
 
+mkdir redis && \
+cd redis && \
 wget "https://github.com/ioanahulpus/cocospa/releases/download/Data/redisDump.tar.gz" && \
 tar -xvf redisDump.tar.gz && \
 \rm redisDump.tar.gz

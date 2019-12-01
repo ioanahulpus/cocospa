@@ -27,6 +27,8 @@ services:
         command: bash -c "mvn spring-boot:run -Dspring-boot.run.arguments=\"/media/data/dbpediaNeo4j/,/media/data/DBpedia2014Selected.hdt,198.13.0.16,6379,http://198.13.0.14:2222/rest/annotate\""
     redis:
         image: redis:5.0.7
+        volumes:
+            - $DATA/redis:/data
         tty: true
         networks:
             net:

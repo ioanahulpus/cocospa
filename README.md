@@ -157,9 +157,8 @@ The following processes make the assumption that the data is already downloaded.
 ### Run using docker
 You can run the api if you have *docker* and *docker-compose* installed.
 ```bash
-	# optional (if the data has been downloaded somewhere else than the data dir)
+	# this must be set even when the data is stored in the default location
 	export DATA="/path/where/data/is/stored"
-
 	# pull and run the containers that we released with compiled code on docker hub
 	docker-compose up -d
 ```
