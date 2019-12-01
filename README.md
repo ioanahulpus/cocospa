@@ -61,18 +61,18 @@ Depending on whether the API is run locally or not and whether the redis cache h
 ##### 2.1 Run complexity assesment on a file
 Calling the API on a single file, simplified (\*.sim) and complex wikipedia (\*.com) can be done by providing the file path to *call_file.py* script.
 ```bash
-python3 scripts/call_file.py data/examples/Immunology.sim http://demaq3.informatik.uni-mannheim.de:8080/complexity
+python3 scripts/call_file.py data/examples/Gambling.sim http://demaq3.informatik.uni-mannheim.de:8080/complexity
 
 # if no URL is provided, it defaults to the server from Mannheim
-python3 scripts/call_file.py data/examples/Immunology.com 
+python3 scripts/call_file.py data/examples/Gambling.com 
 ```
 which returns:
 ```json
 {
-  "complexityScore" : 0.6117326863102032
+  "complexityScore" : 0.49564969874355497
 }
 {
-  "complexityScore" : 1.7271475433638426
+  "complexityScore" : 1.6215938510362011
 }
 ```
 
@@ -91,4 +91,15 @@ which prints the table separated values:
 | Gambling.sim        | 0.5680619862642763  |
 | Immunology.com      | 0.611732686310203   |
 | Immunology.sim      | 1.7271475433638426  |
+
+##### 2.3 Run complexity assesment on Newsela
+First one needs to obtain access the [Newsela Data](https://newsela.com/data/). The result of the script is available in **results/newsela.csv**. The script by default calls an API running on localhost.
+The resuls is a .csv file that shows the scores for different newsela levels:
+
+| Document            |   0    |   1    |   2    |   3    |   4    |
+| ------------------- | :----: | :----: | :----: | :----: | :----: |
+| 10dollarbill-woman  | 31.85  | 32.74  | 17.82  | 13.42  | 11.79  | 
+| 17century-selfies   | 26.52  | 14.91  | 14.83  | 10.15  | 9.04   | 
+| 20dollarbill-female | 28.96  | 28.06  | 25.89  | 18.25  | 13.12  | 
+
 
