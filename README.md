@@ -151,13 +151,14 @@ In order to run the API locally, one needs to [download the data first](https://
 	# the script removes the tar.gz files after it downloads them
 	./download_data.sh
 ```
-The following processes make the assumption that the data is already downloaded.
+The following processes run on the assumption that the data is already downloaded.
 
 <a name="docker"></a>
 ### Run using docker
 You can run the api if you have *docker* and *docker-compose* installed.
 ```bash
 	# this must be set even when the data is stored in the default location
+	# because it is mounted as a volume in the containers
 	export DATA="/path/where/data/is/stored"
 	# pull and run the containers that we released with compiled code on docker hub
 	docker-compose up -d
@@ -166,7 +167,7 @@ If you wish to build the images of the containers from scracth, use `docker-comp
 
 Check that the containers have started successfully (`docker-compose ps`) and that dbspotlight finished loading the data with:
 ```bash
-docker-compose logs dbspotlight
+	docker-compose logs dbspotlight
 ```
 
 <a name="natively"></a>
@@ -182,7 +183,7 @@ To compile the dbspotlight instance that is compatible with our code **please us
 #### 2. Compile cocospa
 Our code is compatible with newer java version and it can be compiled using maven with:
 ```bash
-mvn package
+	mvn package
 ```
 
 #### 3. Install Redis
@@ -208,7 +209,7 @@ sudo mv /var/lib/redis/dump.rdb /var/lib/redis/dump.rdb.backup
 sudo systemctl stop redis
 
 # copy the redis.rdb dump downloaded in the data directory
-sudo cp data/redis.rdb /var/lib/redis/
+sudo cp data/redis/redis.rdb /var/lib/redis/
 # change the access rigths to redis
 sudo chown redis: /var/lib/redis/dump.rdb
 
@@ -217,7 +218,7 @@ sudo systemctl start redis
 sudo systemctl status redis
 
 ```
-if things run smoothly, the dump will consume around 5-6 GB of memory:
+if things work smoothly, the dump will consume around 5-6 GB of memory:
 ```
  redis-server.service - Advanced key-value store
    Loaded: loaded (/lib/systemd/system/redis-server.service; enabled; vendor preset: enabled)
@@ -232,14 +233,17 @@ if things run smoothly, the dump will consume around 5-6 GB of memory:
            └─571 /usr/bin/redis-server 127.0.0.1:6379
 ```
 
-
-# First compile and package the two repos:
-	# mvn package 
-	# cd dbpedia-spotlight-model && mvn package
-# Install redis
-	
-
-
-
+#### 4. Run the services
+Run dbspotlight in one terminal:
+```bash
+	export DATA="/path/where/data/is/stored"
+	./start_dbspotlight.sh
+```
+Run our API endpoint in another terminal:
+```bash
+	export DATA="/path/where/data/is/stored"
+	./start_cocospa.sh
+```
+Done!
 
 
