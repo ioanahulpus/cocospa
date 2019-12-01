@@ -93,6 +93,9 @@ which prints the table separated values:
 | Immunology.sim      | 1.7271475433638426  |
 
 ##### 2.3 Run complexity assesment on Newsela
+```bash
+python3 scripts/call_on_newsela.py $LOCATION_OF_NEWSELA $API_ENDPOINT
+```
 First one needs to obtain access the [Newsela Data](https://newsela.com/data/). The result of the script is available in **results/newsela.csv**. The script by default calls an API running on localhost.
 The resuls is a .csv file that shows the scores for different newsela levels:
 
@@ -103,3 +106,17 @@ The resuls is a .csv file that shows the scores for different newsela levels:
 | 20dollarbill-female | 28.96  | 28.06  | 25.89  | 18.25  | 13.12  | 
 
 
+##### 2.4 Run complexity assesment on Wikipedia
+Download the simple-complex wikipedia first:
+```bash
+cd data && \
+wget https://cs.pomona.edu/~dkauchak/simplification/data.v2/document-aligned.v2.tar.gz && \
+tar -xvf document-aligned.v2.tar.gz
+```
+The result of the script is available in **results/wikipedia.csv**. The script by default calls an API running on localhost. The resuls is a .csv file that shows the scores for different wikipedia documents:
+
+| article | simple | complex | simple_size | complex_size |
+| -------: | :----: | :----: | :----: | :----: |
+| April   | 11.89 | 26.50 | 99 | 535 |
+| August  | 14.61 | 21.92 | 179 | 271 |
+| Art     | 15.73 | 20.07 | 864 | 5916 |
