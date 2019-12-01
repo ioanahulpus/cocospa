@@ -6,7 +6,7 @@ source base.sh
 # https://github.com/ioanahulpus/cocospa/releases/tag/Data
 
 
-DBPEDIA_IN_NEO4J="${DATA_DIR}/dbpediaNeo4J"
+DBPEDIA_IN_NEO4J="${DATA_DIR}/dbpediaNeo4j"
 DBPEDIA_IN_HDT=${DATA_DIR}/DBpedia2014Selected.hdt
 
 # Run the spring service
