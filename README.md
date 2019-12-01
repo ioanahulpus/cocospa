@@ -237,12 +237,21 @@ if things work smoothly, the dump will consume around 5-6 GB of memory:
 ```
 
 #### 4. Run the services
+dbspotlight is a java application that launches an http service. It takes two parameters - the path to the dbspotlight data and the endpoint. 
 Run dbspotlight in one terminal:
 ```bash
 	export DATA="/path/where/data/is/stored"
 	./start_dbspotlight.sh
 ```
-Run our API endpoint in another terminal:
+
+Our API endpoint is a java spring boot endpoint. The arguments that the program expects in this order are:
+- path to a directory containing the dbpedia in neo4j format
+- path to a file containing dbpedia in HDT format
+- redis addres
+- redis port
+- dbspotlight endpoint as a string
+
+In another terminal, run our API endpoint with:
 ```bash
 	export DATA="/path/where/data/is/stored"
 	./start_cocospa.sh
