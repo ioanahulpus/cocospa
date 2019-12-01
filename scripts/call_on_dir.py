@@ -35,6 +35,9 @@ def files_in_folder(mypath):
             fisiere.append(os.path.join(mypath, f))
     return sorted(fisiere)
 
+print ("| Document            | Score               |")
+print ("| ------------------- | :------------------:|")
+
 for file in files_in_folder(dir_path):
     with open(file, 'r', encoding='utf-8') as fin:
         text = fin.read()
@@ -44,5 +47,5 @@ for file in files_in_folder(dir_path):
 
     response = requests.post(URL, headers = header, data = json_data)
     js_response = json.loads(response.text)   
-    print (os.path.basename(file),'\t', js_response['complexityScore'])
+    print ("| " + os.path.basename(file) + ' | ' + str(js_response['complexityScore']) + " |")
     time.sleep(1)

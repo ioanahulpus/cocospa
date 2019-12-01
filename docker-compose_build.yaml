@@ -2,7 +2,9 @@ version: '2.1'
 
 services:
     dbspotlight:
-        image: snisioi/dbspotlight:latest
+        build:
+            context: docker
+            dockerfile: Dockerfile-dbspotlight
         #user: $UID:$GID
         volumes:
             - $DATA:/media/data
@@ -12,7 +14,9 @@ services:
               ipv4_address: 198.13.0.14
         command: bash -c "/usr/lib/jvm/java-8-openjdk-amd64/bin/java -Xmx300g -jar rest/target/rest-1.0-jar-with-dependencies.jar /media/data/en http://0.0.0.0:2222/rest"
     cocospa:
-        image: snisioi/cocospa:latest
+        build:
+            context: docker
+            dockerfile: Dockerfile-cocospa
         #user: $UID:$GID
         ports:
           - "8080:8080"

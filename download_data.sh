@@ -1,5 +1,7 @@
 #!/bin/bash 
 
+source base.sh
+
 while true; do
     read -p "This script will download ~38 GB of data. Are you sure?" yn
     case $yn in
@@ -9,7 +11,7 @@ while true; do
     esac
 done
 
-cd data && \
+cd ${DATA_DIR} && \
 
 wget "https://github.com/ioanahulpus/cocospa/releases/download/Data/dbpedia2014inHDT.tar.gz" && \
 tar -xvf dbpedia2014inHDT.tar.gz && \

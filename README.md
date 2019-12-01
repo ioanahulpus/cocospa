@@ -7,6 +7,9 @@ This is the code to run and call an HTTP endpoint that returns a score of concep
 	- [Parameter description](https://github.com/ioanahulpus/cocospa/blob/master/README.md#params)
 	- [cURL Example](https://github.com/ioanahulpus/cocospa/blob/master/README.md#curl)
 	- [python Example](https://github.com/ioanahulpus/cocospa/blob/master/README.md#python)
+- [Running the API](https://github.com/ioanahulpus/cocospa/blob/master/README.md#run)
+	- [Using docker](https://github.com/ioanahulpus/cocospa/blob/master/README.md#docker)
+	- [Run natively](https://github.com/ioanahulpus/cocospa/blob/master/README.md#localhost)
 
 
 <a name="api"></a> 
@@ -131,3 +134,33 @@ The result of the script is available in **results/wikipedia.csv**. The script b
 | April   | 11.89 | 26.50 | 99 | 535 |
 | August  | 14.61 | 21.92 | 179 | 271 |
 | Art     | 15.73 | 20.07 | 864 | 5916 |
+
+
+<a name="run"></a> 
+## Running the API
+In order to run the API locally, one needs to [download the data first](https://github.com/ioanahulpus/cocospa/tree/master/data). The shell script `download_data.sh` will pull 38 GB consisting of dbpedia dumps, dpbedia-spotlight dumps and a redis cache dump. If you do not have enough space in the data directory of the repository, set $DATA environment variable to the pathe where it can be downloaded:
+```bash
+	# if there is not enough space in the data directory where the repo is cloned:
+	export DATA="/path/where/data/is/stored"
+
+	# the script removes the tar.gz files after it downloads them
+	./download_data.sh
+```
+
+
+### Run using docker
+You can run the api if you have *docker* and *docker-compose* installed.
+```bash
+	# optional (if the data has been downloaded somewhere else than the data dir)
+	export DATA="/path/where/data/is/stored"
+
+	# pull and run the containers that we released with compiled code on docker hub
+	docker-compose up -d
+```
+If you wish to build the images of the containers from scracth, use `docker-compose -f docker-compose_build.yaml up -d`.
+
+
+
+
+
+
