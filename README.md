@@ -1,6 +1,11 @@
 # Conceptual Complexity using Spreading Activation ![](https://github.com/ioanahulpus/cocospa/workflows/Java%20CI/badge.svg)
 
-This is the code to run and call an HTTP endpoint that returns a score of conceptual complexity for a text. We are currently running a Swagger API component onto a server at the [University of Mannheim](http://demaq3.informatik.uni-mannheim.de:8080/swagger-ui.html)
+This is the code to run and call an HTTP endpoint that returns a score of conceptual complexity for a text. We are currently running a Swagger API component onto a server at the [University of Mannheim](http://demaq3.informatik.uni-mannheim.de:8080/swagger-ui.html).
+
+Clone the repo using:
+```bash
+	git clone --recurse-submodules https://github.com/ioanahulpus/cocospa
+```
 
 ## Contents
 - [Calling the API](https://github.com/ioanahulpus/cocospa/blob/master/README.md#api)
@@ -9,7 +14,7 @@ This is the code to run and call an HTTP endpoint that returns a score of concep
 	- [python Example](https://github.com/ioanahulpus/cocospa/blob/master/README.md#python)
 - [Running the API](https://github.com/ioanahulpus/cocospa/blob/master/README.md#run)
 	- [Using docker](https://github.com/ioanahulpus/cocospa/blob/master/README.md#docker)
-	- [Run natively](https://github.com/ioanahulpus/cocospa/blob/master/README.md#localhost)
+	- [Run natively](https://github.com/ioanahulpus/cocospa/blob/master/README.md#natively)
 
 
 <a name="api"></a> 
@@ -107,7 +112,7 @@ which prints the table separated values:
 ```bash
 python3 scripts/call_on_newsela.py $LOCATION_OF_NEWSELA $API_ENDPOINT
 ```
-First one needs to obtain access the [Newsela Data](https://newsela.com/data/). The result of the script is available in **results/newsela.csv**. The script by default calls an API running on localhost.
+First one needs to obtain access the [Newsela Data](https://newsela.com/data/). The result of the script is available in **results/newsela.csv**. The script by default calls an API running on natively.
 The resuls is a .csv file that shows the scores for different newsela levels:
 
 | Document            |   0    |   1    |   2    |   3    |   4    |
@@ -127,7 +132,7 @@ cd ..
 # run the python script
 python3 scripts/call_on_wikipedia.py data/document-aligned.v2/simple.txt data/document-aligned.v2/normal.txt $API_ENDPOINT
 ```
-The result of the script is available in **results/wikipedia.csv**. The script by default calls an API running on localhost. The resuls is a .csv file that shows the scores for different wikipedia documents:
+The result of the script is available in **results/wikipedia.csv**. The script by default calls an API running on natively. The resuls is a .csv file that shows the scores for different wikipedia documents:
 
 | article | simple | complex | simple_size | complex_size |
 | -------: | :----: | :----: | :----: | :----: |
@@ -138,7 +143,7 @@ The result of the script is available in **results/wikipedia.csv**. The script b
 
 <a name="run"></a> 
 ## Running the API
-In order to run the API locally, one needs to [download the data first](https://github.com/ioanahulpus/cocospa/tree/master/data). The shell script `download_data.sh` will pull 38 GB consisting of dbpedia dumps, dpbedia-spotlight dumps and a redis cache dump. If you do not have enough space in the data directory of the repository, set $DATA environment variable to the pathe where it can be downloaded:
+In order to run the API locally, one needs to [download the data first](https://github.com/ioanahulpus/cocospa/tree/master/data). The shell script `download_data.sh` will pull 38 GB consisting of dbpedia dumps, dpbedia-spotlight dumps and a redis cache dump. If you do not have enough space in the data directory of the repository, set $DATA environment variable to the path where it can be downloaded:
 ```bash
 	# if there is not enough space in the data directory where the repo is cloned:
 	export DATA="/path/where/data/is/stored"
@@ -146,8 +151,9 @@ In order to run the API locally, one needs to [download the data first](https://
 	# the script removes the tar.gz files after it downloads them
 	./download_data.sh
 ```
+The following processes make the assumption that the data is already downloaded.
 
-
+<a name="docker"></a>
 ### Run using docker
 You can run the api if you have *docker* and *docker-compose* installed.
 ```bash
@@ -159,6 +165,80 @@ You can run the api if you have *docker* and *docker-compose* installed.
 ```
 If you wish to build the images of the containers from scracth, use `docker-compose -f docker-compose_build.yaml up -d`.
 
+Check that the containers have started successfully (`docker-compose ps`) and that dbspotlight finished loading the data with:
+```bash
+docker-compose logs dbspotlight
+```
+
+<a name="natively"></a>
+### Run natively
+
+#### 1. Compile dbspotlight
+To compile the dbspotlight instance that is compatible with our code **please use java 8**, and run:
+```bash
+	cd dbpedia-spotlight-model 
+	mvn package
+	cd ..
+```
+#### 2. Compile cocospa
+Our code is compatible with newer java version and it can be compiled using maven with:
+```bash
+mvn package
+```
+
+#### 3. Install Redis
+A redis instance must run on localhost first. Follow the steps in this [tutorial to install Redis](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04).
+
+
+To have the api running faster, we provide a dump of a database in which the activations have been computed for a large number of entities. The dump has been saved with redis version 5.0.6. **If you are running a newer version (e.g., 6.0.1), the dump might not be compatible**. This will not be a problem if you run using docker.
+
+To load the dump that we provide in your redis instance, follow the steps provided here:
+
+```bash
+# get current redis dump and make a backup (optional, if you just installed)
+redis-cli
+127.0.0.1:6379> CONFIG GET dir
+	1) "dir"
+	2) "/var/lib/redis/"
+127.0.0.1:6379> SAVE
+	OK
+exit
+sudo mv /var/lib/redis/dump.rdb /var/lib/redis/dump.rdb.backup
+
+# stop redis
+sudo systemctl stop redis
+
+# copy the redis.rdb dump downloaded in the data directory
+sudo cp data/redis.rdb /var/lib/redis/
+# change the access rigths to redis
+sudo chown redis: /var/lib/redis/dump.rdb
+
+# start redis
+sudo systemctl start redis
+sudo systemctl status redis
+
+```
+if things run smoothly, the dump will consume around 5-6 GB of memory:
+```
+ redis-server.service - Advanced key-value store
+   Loaded: loaded (/lib/systemd/system/redis-server.service; enabled; vendor preset: enabled)
+   Active: active (running) since Wed 2019-11-27 15:18:44 CET; 3 days ago
+     Docs: http://redis.io/documentation,
+           man:redis-server(1)
+  Process: 434 ExecStart=/usr/bin/redis-server /etc/redis/redis.conf (code=exited, status=0/SUCCESS)
+ Main PID: 571 (redis-server)
+    Tasks: 4 (limit: 4915)
+   Memory: 6.1G
+   CGroup: /system.slice/redis-server.service
+           └─571 /usr/bin/redis-server 127.0.0.1:6379
+```
+
+
+# First compile and package the two repos:
+	# mvn package 
+	# cd dbpedia-spotlight-model && mvn package
+# Install redis
+	
 
 
 
