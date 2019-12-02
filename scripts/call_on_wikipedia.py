@@ -79,7 +79,8 @@ def clean(text):
 
 with open('wikipedia_eval_clean.csv', 'w') as fout:
     fout.write('\t'.join(['article', 'simple', 'complex', 'simple_size', 'complex_size']) + '\n')
-    for (article_name, simple_text), (_, complecs_text) in zip(articles_simple_wikipedia.items(), articles_complecs_wikipedia.items()):
+    for (article_name, simple_text) in articles_simple_wikipedia.items():
+        complecs_text = articles_complecs_wikipedia[article_name]
         simp_score = get_complexity_from_api(clean(simple_text))
         comp_score = get_complexity_from_api(clean(complecs_text))
         
