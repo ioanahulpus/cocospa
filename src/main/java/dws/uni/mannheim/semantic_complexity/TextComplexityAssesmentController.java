@@ -98,15 +98,15 @@ public class TextComplexityAssesmentController
         response.setText2ComplexityScore(complexityScoreT2);
         if (response.getText1ComplexityScore() == -1 && response.getText2ComplexityScore() == -1)
         {
-            response.setComparison("No relevant linked entities have been found. Can't compare the complexity of text1 and text2.");
+            response.setComparison("Could not find relevant linked entities or the activations didn't reach the threshold. Can't compare the complexity of text1 and text2.");
         }
         else if (response.getText1ComplexityScore() == -1)
         {
-            response.setComparison("No relevant linked entities have been found in text1. Can't evaluate complexity.");
+            response.setComparison("Could not find relevant linked entities or the activations didn't reach the threshold. Can't compare the complexity of text1 and text2.");
         }
         else if (response.getText2ComplexityScore() == -1)
         {
-            response.setComparison("No relevant linked entities have been found in text2. Can't evaluate complexity.");
+            response.setComparison("Could not find relevant linked entities or the activations didn't reach the threshold. Can't compare the complexity of text1 and text2.");
         }
         else if (Math.abs(complexityScoreT1 - complexityScoreT2) <= 0.001)
         {
