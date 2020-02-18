@@ -77,6 +77,8 @@ def clean(text):
     text = text.strip()
     return text
 
+counter = 0
+
 with open('wikipedia_eval_clean.csv', 'w') as fout:
     fout.write('\t'.join(['article', 'simple', 'complex', 'simple_size', 'complex_size']) + '\n')
     for (article_name, simple_text) in articles_simple_wikipedia.items():
@@ -86,9 +88,11 @@ with open('wikipedia_eval_clean.csv', 'w') as fout:
         
         simp_size = len(simple_text.split(' '))
         comp_size = len(complecs_text.split(' '))
-
+        if simp_score < comp_score:
+            counter += 1
         line = '\t'.join([article_name, str(simp_score), str(comp_score), str(simp_size), str(comp_size)])
-        print (line)
+        #print (line)
+        print (counter)
         fout.write(line + '\n')
 
 
